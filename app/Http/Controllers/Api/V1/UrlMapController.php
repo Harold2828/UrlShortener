@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\StoreUrlMapRequest;
 use App\Http\Requests\UpdateUrlMapRequest;
 use App\Models\UrlMap;
+use App\Http\Controllers\Controller;
 
 class UrlMapController extends Controller
 {
@@ -13,7 +14,7 @@ class UrlMapController extends Controller
      */
     public function index()
     {
-        //
+        return UrlMap::all();
     }
 
     /**
