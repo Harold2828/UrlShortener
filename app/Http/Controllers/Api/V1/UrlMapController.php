@@ -6,6 +6,8 @@ use App\Http\Requests\StoreUrlMapRequest;
 use App\Http\Requests\UpdateUrlMapRequest;
 use App\Models\UrlMap;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\UrlMapResource;
+use App\Http\Resources\V1\UrlMapCollection;
 
 class UrlMapController extends Controller
 {
@@ -14,7 +16,7 @@ class UrlMapController extends Controller
      */
     public function index()
     {
-        return UrlMap::all();
+        return new UrlMapCollection(UrlMap::paginate());
     }
 
     /**
@@ -38,7 +40,7 @@ class UrlMapController extends Controller
      */
     public function show(UrlMap $urlMap)
     {
-        //
+        return new UrlMapResource($urlMap);
     }
 
     /**
