@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\StoreUrlMapRequest;
 use App\Http\Requests\UpdateUrlMapRequest;
 use App\Models\UrlMap;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\UrlMapResource;
+use App\Http\Resources\V1\UrlMapCollection;
 
 class UrlMapController extends Controller
 {
@@ -13,15 +16,7 @@ class UrlMapController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return new UrlMapCollection(UrlMap::paginate());
     }
 
     /**
@@ -37,15 +32,7 @@ class UrlMapController extends Controller
      */
     public function show(UrlMap $urlMap)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(UrlMap $urlMap)
-    {
-        //
+        return new UrlMapResource($urlMap);
     }
 
     /**
