@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\UrlMapResource;
 use App\Http\Resources\V1\UrlMapCollection;
 
+use Illuminate\Http\Request;
+
 class UrlMapController extends Controller
 {
     /**
@@ -33,6 +35,31 @@ class UrlMapController extends Controller
     public function show(UrlMap $urlMap)
     {
         return new UrlMapResource($urlMap);
+    }
+
+    public function extendUrl(Request $request)
+    {
+
+        echo json_encode($request);
+    }
+
+    public function redirectToOriginalURL(string $shortUrl){
+
+        $answer = null;
+
+        $urlMap = new UrlMap();
+
+        $url = $urlMap::where('short_url', $shortUrl)->first();
+
+        if($url){
+
+            return redirect()->away($url->original_url);
+        }else{
+
+            $answer = response()->json(['error' => 'Short URL not found'], 404);
+        }
+
+        return $answer;
     }
 
     /**

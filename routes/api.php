@@ -33,3 +33,5 @@ Route::group($settings,function(){
 
     Route::apiResource('urls', UrlMapController::class);
 });
+
+Route::get('/{shortUrl}',[UrlMapController::class,'redirectToOriginalURL']);
